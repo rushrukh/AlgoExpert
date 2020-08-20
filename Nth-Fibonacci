@@ -1,0 +1,38 @@
+//Recursive solution with Memoization: SC - O(n), TC - O(n)
+
+int calculateFib(int n, unordered_map<int, int> &hashMap);
+
+int getNthFib(int n) {
+	unordered_map<int, int> hashMap;
+	hashMap.insert({1, 0});
+	hashMap.insert({2, 1});
+	
+	return calculateFib(n, hashMap);
+}
+
+int calculateFib(int n, unordered_map<int, int> &hashMap) {
+	if(hashMap.find(n) != hashMap.end())
+		return hashMap[n];
+	
+	hashMap[n] = calculateFib(n - 1, hashMap) + calculateFib(n - 2, hashMap);
+	return hashMap[n];
+}
+
+//Iterative solution: SC - O(1), TC - O(n)
+
+int getNthFib(int n) {
+	int prev = 0;
+	if(n == 1)
+		return prev;
+	
+	int curr = 1;
+	if(n == 2)
+		return curr;
+	
+	for(int i = 2; i < n; i++) {
+		int tmp = curr;
+		curr += prev;
+		prev= tmp;
+	}
+	return curr;
+}}
