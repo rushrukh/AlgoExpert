@@ -1,0 +1,40 @@
+// TC: O(nlogn), SC: O(1)
+
+vector<int> twoNumberSum(vector<int> array, int targetSum) {
+	vector<int> result;
+	sort(array.begin(), array.end());
+	int i = 0, j = array.size() - 1;
+
+	while(i < j) {
+		if(array[i] + array[j] == targetSum) {
+			result.push_back(array[i]);
+			result.push_back(array[j]);
+			return result;
+		}
+		else if(array[i] + array[j] > targetSum)
+			j--;
+		else
+			i++;
+	}
+  return result;
+}
+
+// TC: O(n), SC: O(n)
+
+vector<int> twoNumberSum(vector<int> array, int targetSum) {
+	unordered_set<int> counterPart;
+	vector<int> result;
+	
+	for(auto a: array)
+		counterPart.insert(a);
+	
+	for(auto a: array) {
+		if(counterPart.find(targetSum - a) != counterPart.end() && (targetSum - a) != a) {
+			result.push_back(a);
+			result.push_back(targetSum - a);
+			return result;
+		}
+	}
+	
+  return result;
+}
