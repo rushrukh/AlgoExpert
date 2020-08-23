@@ -1,0 +1,25 @@
+// TC: O(nlogn, mlogm), SC: O(1)
+
+#include <vector>
+using namespace std;
+
+vector<int> smallestDifference(vector<int> arrayOne, vector<int> arrayTwo) {
+	int firstVal = 0, secondVal = 0, absoluteDiff = INT_MAX, firstPointer = 0, secondPointer = 0;
+	sort(arrayOne.begin(), arrayOne.end());
+	sort(arrayTwo.begin(), arrayTwo.end());
+
+	while((firstPointer < arrayOne.size()) && (secondPointer < arrayTwo.size())) {
+		if(abs(arrayOne[firstPointer] - arrayTwo[secondPointer]) < absoluteDiff) {
+			absoluteDiff = abs(arrayOne[firstPointer] - arrayTwo[secondPointer]);
+			firstVal = arrayOne[firstPointer], secondVal = arrayTwo[secondPointer];
+		}
+		
+		if(arrayOne[firstPointer] == arrayTwo[secondPointer])
+			return {firstVal, secondVal};
+		else if(arrayOne[firstPointer] < arrayTwo[secondPointer])
+			firstPointer++;
+		else
+			secondPointer++;
+	}
+  return {firstVal, secondVal};
+}
