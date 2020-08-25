@@ -1,0 +1,23 @@
+// TC: O(n), SC: O(1)
+
+bool isMonotonic(vector<int> array) {
+	if(array.size() < 2)
+		return true;
+	
+	int nonIncreasingFlag = 0, nonDecreasingFlag = 0;
+	
+	for(int i = 0; i < array.size() - 1; i++) {
+		while(array[i] == array[i + 1])
+			i++;
+		
+		if(array[i] > array[i + 1])
+			nonDecreasingFlag = 1;
+		
+		if(array[i] < array[i + 1])
+			nonIncreasingFlag = 1;
+	}
+	if(nonIncreasingFlag == 0 && nonDecreasingFlag == 0)
+		return true;
+	
+	return nonIncreasingFlag != nonDecreasingFlag;
+}
