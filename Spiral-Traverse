@@ -1,0 +1,29 @@
+// TC: O(N), SC: O(N) where N is the total number of elements in the 2D matrice
+
+vector<int> spiralTraverse(vector<vector<int>> array) {
+	vector<int> result;
+  int sR = 0, sC = 0, eR = array.size() - 1, eC = array[0].size() - 1;
+	
+	while((sR <= eR) && (sC <= eC)) {
+		for(int i = sC; i <= eC; i++)
+			result.push_back(array[sR][i]);
+
+		for(int i = sR + 1; i <= eR; i++) 
+			result.push_back(array[i][eC]);
+		
+		
+		for(int i = eC - 1; i >= sC; i--) {
+			if(sR == eR)
+				break;
+			result.push_back(array[eR][i]);
+		}
+
+		for(int i = eR - 1; i >= sR + 1; i--) {
+			if(sC == eC)
+				break;
+			result.push_back(array[i][sC]);
+		}
+		sR++, sC++, eR--, eC--;
+	}
+  return result;
+}
