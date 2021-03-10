@@ -1,0 +1,21 @@
+// O(n) time | O(n) space - where n is the length of the input array
+
+#include <vector>
+using namespace std;
+
+vector<int> sortedSquaredArray(vector<int> array) {
+  // Write your code here.
+	vector <int> squared(array.size());
+	
+	int lowPointer = 0;
+	int highPointer = array.size() - 1;
+	
+	for(int i = 0; i < array.size(); i++) {
+		if(abs(array[lowPointer]) <= abs(array[highPointer]))
+			squared[array.size() - i - 1] = array[highPointer] * array[highPointer], highPointer--;
+		
+		else
+			squared[array.size() - i - 1] = array[lowPointer] * array[lowPointer], lowPointer++;
+	}
+  return squared;
+}
