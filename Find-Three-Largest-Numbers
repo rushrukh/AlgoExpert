@@ -1,0 +1,35 @@
+// O(n) time | O(1) space
+
+#include <vector>
+using namespace std;
+
+vector<int> findThreeLargestNumbers(vector<int> array) {
+	vector<int> threeLargestNumbers{INT_MIN, INT_MIN, INT_MIN};
+	
+	for(auto x: array) {
+		if(x > threeLargestNumbers[2]) {
+			int tempOne = threeLargestNumbers[2];
+			threeLargestNumbers[2] = x;
+			
+			int tempTwo = threeLargestNumbers[1];
+			threeLargestNumbers[1] = tempOne;
+			
+			threeLargestNumbers[0] = tempTwo;
+			continue;
+		}
+		
+		if(x > threeLargestNumbers[1]) {
+			int tempOne = threeLargestNumbers[1];
+			threeLargestNumbers[1] = x;
+			threeLargestNumbers[0] = tempOne;
+			
+			continue;
+		}
+		
+		if(x > threeLargestNumbers[0]) {
+			threeLargestNumbers[0] = x;
+		}
+	}
+	
+  return threeLargestNumbers;
+}
